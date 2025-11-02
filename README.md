@@ -1,59 +1,160 @@
-# TimeAndTemp
+# WeatherZone - Weather & Time Zones
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.8.
+A modern Angular application for viewing real-time weather forecasts and time zone information for cities worldwide. Built with Angular, TypeScript, and Tailwind CSS.
 
-## Development server
+## Features
 
-To start a local development server, run:
+- 🌍 **City Search** - Search for any city worldwide with autocomplete
+- 🌤️ **Current Weather** - View current conditions, temperature, humidity, and wind speed
+- 📅 **7-Day Forecast** - See extended weather forecasts
+- 📊 **24-Hour Chart** - Visualize hourly temperature trends
+- ⏰ **Time Zones** - Display local time and UTC offset for any location
+- ⭐ **Favorites** - Save your favorite cities for quick access
+- 📍 **Geolocation** - Get weather for your current location
+- 🌓 **Dark Mode** - Toggle between light and dark themes
+- 🌡️ **Unit Toggle** - Switch between Celsius/Fahrenheit and km/h/mph
+
+## Tech Stack
+
+- **Framework**: Angular 20
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **APIs**:
+  - Open-Meteo API (Weather data)
+  - WorldTimeAPI (Time zone data)
+  - Open-Meteo Geocoding API (City search)
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v18 or higher)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
 
 ```bash
+git clone <your-repo-url>
+cd time-and-temp
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Start the development server:
+
+```bash
+npm start
+# or
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+4. Open your browser and navigate to `http://localhost:4200/`
 
-## Code scaffolding
+## Building for Production
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+To build the project for production:
 
 ```bash
-ng generate --help
+npm run build
+# or
+ng build
 ```
 
-## Building
+The build artifacts will be stored in the `dist/time-and-temp/` directory.
 
-To build the project run:
+## Deployment
+
+### Deploy to GitHub Pages
+
+1. Build the project:
+
+```bash
+ng build --base-href=/<repository-name>/
+```
+
+2. Install `angular-cli-ghpages`:
+
+```bash
+npm install -g angular-cli-ghpages
+```
+
+3. Deploy:
+
+```bash
+npx angular-cli-ghpages --dir=dist/time-and-temp/browser
+```
+
+### Deploy to Netlify
+
+1. Build the project:
 
 ```bash
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+2. Deploy the `dist/time-and-temp/browser` folder to Netlify
 
-## Running unit tests
+### Deploy to Vercel
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+1. Install Vercel CLI:
+
+```bash
+npm i -g vercel
+```
+
+2. Deploy:
+
+```bash
+vercel
+```
+
+## Project Structure
+
+```
+src/
+├── app/
+│   ├── components/      # Reusable UI components
+│   ├── pages/           # Page components
+│   ├── services/        # Angular services (API calls, state management)
+│   ├── models/          # TypeScript interfaces/types
+│   └── utils/           # Utility functions
+├── styles.css           # Global styles and Tailwind imports
+└── index.html           # Main HTML file
+```
+
+## Development
+
+### Code scaffolding
+
+Generate a new component:
+
+```bash
+ng generate component component-name
+```
+
+Generate a new service:
+
+```bash
+ng generate service service-name
+```
+
+### Running tests
 
 ```bash
 ng test
 ```
 
-## Running end-to-end tests
+## License
 
-For end-to-end (e2e) testing, run:
+This project is open source and available under the MIT License.
 
-```bash
-ng e2e
-```
+## Acknowledgments
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Weather data provided by [Open-Meteo](https://open-meteo.com/)
+- Time zone data provided by [WorldTimeAPI](http://worldtimeapi.org/)
