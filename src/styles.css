@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 210 100% 97%;
+    --foreground: 215 25% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 215 25% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 25% 15%;
+
+    --primary: 205 90% 48%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 200 20% 92%;
+    --secondary-foreground: 215 25% 15%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 35 95% 58%;
+    --accent-foreground: 215 25% 15%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 205 90% 48%;
+
+    --radius: 0.75rem;
+
+    --gradient-day: linear-gradient(135deg, hsl(200 100% 85%) 0%, hsl(210 100% 92%) 100%);
+    --gradient-night: linear-gradient(135deg, hsl(230 50% 20%) 0%, hsl(250 60% 30%) 100%);
+    --gradient-sunny: linear-gradient(135deg, hsl(48 100% 85%) 0%, hsl(45 100% 75%) 100%);
+    --gradient-rainy: linear-gradient(135deg, hsl(210 20% 70%) 0%, hsl(210 25% 55%) 100%);
+    --gradient-snowy: linear-gradient(135deg, hsl(200 50% 90%) 0%, hsl(210 60% 95%) 100%);
+    --gradient-stormy: linear-gradient(135deg, hsl(220 15% 55%) 0%, hsl(230 20% 35%) 100%);
+    --gradient-card: linear-gradient(135deg, hsla(0 0% 100% / 0.9) 0%, hsla(0 0% 100% / 0.7) 100%);
+
+    --shadow-soft: 0 4px 6px -1px hsla(205 90% 48% / 0.1), 0 2px 4px -2px hsla(205 90% 48% / 0.1);
+    --shadow-glow: 0 0 20px hsla(205 90% 48% / 0.2);
+  }
+
+  .dark {
+    --background: 220 25% 10%;
+    --foreground: 210 40% 98%;
+
+    --card: 220 20% 14%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 220 20% 14%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 205 90% 58%;
+    --primary-foreground: 215 25% 15%;
+
+    --secondary: 220 20% 20%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 220 20% 20%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 35 95% 58%;
+    --accent-foreground: 215 25% 15%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 20% 20%;
+    --input: 220 20% 20%;
+    --ring: 205 90% 58%;
+
+    --gradient-day: linear-gradient(135deg, hsl(220 40% 15%) 0%, hsl(230 40% 20%) 100%);
+    --gradient-night: linear-gradient(135deg, hsl(230 50% 10%) 0%, hsl(250 60% 15%) 100%);
+    --gradient-sunny: linear-gradient(135deg, hsl(45 80% 50%) 0%, hsl(35 85% 45%) 100%);
+    --gradient-rainy-dark: linear-gradient(135deg, hsl(210 25% 25%) 0%, hsl(210 30% 18%) 100%);
+    --gradient-snowy-dark: linear-gradient(135deg, hsl(210 30% 20%) 0%, hsl(220 35% 30%) 100%);
+    --gradient-stormy-dark: linear-gradient(135deg, hsl(230 25% 15%) 0%, hsl(240 30% 10%) 100%);
+    --gradient-card: linear-gradient(
+      135deg,
+      hsla(220 20% 14% / 0.9) 0%,
+      hsla(220 20% 18% / 0.7) 100%
+    );
+
+    --shadow-soft: 0 4px 6px -1px hsla(0 0% 0% / 0.3), 0 2px 4px -2px hsla(0 0% 0% / 0.3);
+    --shadow-glow: 0 0 20px hsla(205 90% 58% / 0.3);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
