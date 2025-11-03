@@ -9,7 +9,7 @@ import { CardComponent } from './ui/card.component';
   standalone: true,
   imports: [CommonModule, CardComponent],
   template: `
-    <app-card className="p-6 bg-gradient-card backdrop-blur-sm border-primary/20 shadow-soft">
+    <app-card className="p-6 bg-gradient-card backdrop-blur-sm border-primary/20 shadow-soft mt-6 mb-6">
       <h3 class="text-xl font-bold text-card-foreground mb-4">24-Hour Forecast</h3>
 
       <div class="overflow-x-auto">
