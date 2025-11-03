@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy, signal } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, OnChanges, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardComponent } from './ui/card.component';
 
@@ -70,14 +70,18 @@ import { CardComponent } from './ui/card.component';
   `,
   styles: [],
 })
-export class TimezoneCardComponent implements OnInit, OnDestroy {
+export class TimezoneCardComponent implements OnInit, OnDestroy, OnChanges {
   @Input() timezone!: string;
   @Input() utcOffset?: string;
 
   time = signal(new Date());
   private intervalId: any;
+  private effectiveTimezone: string = '';
 
   ngOnInit(): void {
+    // Determine effective timezone
+    this.updateEffectiveTimezone();
+
     // Get initial time
     this.updateTime();
 
@@ -85,6 +89,20 @@ export class TimezoneCardComponent implements OnInit, OnDestroy {
     this.intervalId = setInterval(() => {
       this.updateTime();
     }, 1000);
+  }
+
+  ngOnChanges(): void {
+    // Update timezone when input changes
+    this.updateEffectiveTimezone();
+  }
+
+  private updateEffectiveTimezone(): void {
+    // Use timezone from worldTime first, then place, otherwise local
+    if (this.timezone && this.timezone !== 'Local' && this.timezone.trim() !== '') {
+      this.effectiveTimezone = this.timezone;
+    } else {
+      this.effectiveTimezone = '';
+    }
   }
 
   ngOnDestroy(): void {
@@ -100,14 +118,18 @@ export class TimezoneCardComponent implements OnInit, OnDestroy {
 
   formatTime(): string {
     // Use timeZone option to format time in the target timezone
-    if (this.timezone && this.timezone !== 'Local') {
-      return this.time().toLocaleTimeString('en-US', {
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: false,
-        timeZone: this.timezone,
-      });
+    if (this.effectiveTimezone) {
+      try {
+        return this.time().toLocaleTimeString('en-US', {
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: false,
+          timeZone: this.effectiveTimezone,
+        });
+      } catch (error) {
+        console.error('Error formatting time with timezone:', this.effectiveTimezone, error);
+      }
     }
     // Fallback to local time
     return this.time().toLocaleTimeString('en-US', {
@@ -120,14 +142,18 @@ export class TimezoneCardComponent implements OnInit, OnDestroy {
 
   formatDate(): string {
     // Use timeZone option to format date in the target timezone
-    if (this.timezone && this.timezone !== 'Local') {
-      return this.time().toLocaleDateString('en-US', {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        timeZone: this.timezone,
-      });
+    if (this.effectiveTimezone) {
+      try {
+        return this.time().toLocaleDateString('en-US', {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          timeZone: this.effectiveTimezone,
+        });
+      } catch (error) {
+        console.error('Error formatting date with timezone:', this.effectiveTimezone, error);
+      }
     }
     // Fallback to local time
     return this.time().toLocaleDateString('en-US', {
