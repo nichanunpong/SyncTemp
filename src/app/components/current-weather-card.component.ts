@@ -9,8 +9,8 @@ import { CardComponent } from './ui/card.component';
   standalone: true,
   imports: [CommonModule, CardComponent],
   template: `
-    <app-card className="p-6 bg-gradient-card backdrop-blur-sm border-primary/20 shadow-glow">
-      <div class="text-center space-y-4">
+    <app-card className="p-6 bg-gradient-card backdrop-blur-sm border-primary/20 shadow-glow h-full flex flex-col">
+      <div class="text-center space-y-4 flex-1 flex flex-col">
         <h2 class="text-2xl font-bold text-card-foreground">{{ cityName }}</h2>
 
         <div class="py-6">

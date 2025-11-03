@@ -121,7 +121,7 @@ import { CurrentWeather, HourlyForecast, DailyForecast, WorldTime, Place } from 
         <main class="max-w-5xl mx-auto space-y-6">
           <app-weather-alerts [weather]="currentWeather()!" />
 
-          <div class="grid md:grid-cols-2 gap-6">
+          <div class="grid md:grid-cols-2 gap-6 items-stretch">
             <app-current-weather-card [weather]="currentWeather()!" [cityName]="getCityName()" />
 
             <app-timezone-card

@@ -7,8 +7,8 @@ import { CardComponent } from './ui/card.component';
   standalone: true,
   imports: [CommonModule, CardComponent],
   template: `
-    <app-card className="p-6 bg-gradient-card backdrop-blur-sm border-primary/20 shadow-glow">
-      <div class="text-center space-y-4">
+    <app-card className="p-6 bg-gradient-card backdrop-blur-sm border-primary/20 shadow-glow h-full flex flex-col">
+      <div class="text-center space-y-4 flex-1 flex flex-col">
         <div class="flex items-center justify-center space-x-2 text-muted-foreground">
           <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
