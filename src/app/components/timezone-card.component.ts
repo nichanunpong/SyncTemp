@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy, OnChanges, signal } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, OnChanges, SimpleChanges, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardComponent } from './ui/card.component';
 
@@ -91,9 +91,11 @@ export class TimezoneCardComponent implements OnInit, OnDestroy, OnChanges {
     }, 1000);
   }
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     // Update timezone when input changes
-    this.updateEffectiveTimezone();
+    if (changes['timezone']) {
+      this.updateEffectiveTimezone();
+    }
   }
 
   private updateEffectiveTimezone(): void {
