@@ -7,7 +7,9 @@ import { CardComponent } from './ui/card.component';
   standalone: true,
   imports: [CommonModule, CardComponent],
   template: `
-    <app-card className="p-6 bg-gradient-card backdrop-blur-sm border-primary/20 shadow-glow h-full flex flex-col">
+    <app-card
+      className="p-6 bg-gradient-card backdrop-blur-sm border-primary/20 shadow-glow h-full flex flex-col"
+    >
       <div class="text-center space-y-4 flex-1 flex flex-col">
         <div class="flex items-center justify-center space-x-2 text-muted-foreground">
           <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -74,10 +76,27 @@ export class TimezoneCardComponent implements OnInit, OnDestroy {
 
   time = signal(new Date());
   private intervalId: any;
+  private baseTime: Date | null = null;
+  private utcOffsetMinutes: number = 0;
 
   ngOnInit(): void {
+    // Calculate UTC offset in minutes
+    if (this.utcOffset) {
+      const offsetParts = this.utcOffset.match(/([+-])(\d{2}):(\d{2})/);
+      if (offsetParts) {
+        const sign = offsetParts[1] === '+' ? 1 : -1;
+        const hours = parseInt(offsetParts[2], 10);
+        const minutes = parseInt(offsetParts[3], 10);
+        this.utcOffsetMinutes = sign * (hours * 60 + minutes);
+      }
+    }
+
+    // Get initial time
+    this.updateTime();
+
+    // Update every second
     this.intervalId = setInterval(() => {
-      this.time.set(new Date());
+      this.updateTime();
     }, 1000);
   }
 
@@ -87,12 +106,27 @@ export class TimezoneCardComponent implements OnInit, OnDestroy {
     }
   }
 
+  private updateTime(): void {
+    const now = new Date();
+    
+    if (this.utcOffsetMinutes !== 0) {
+      // Calculate time in the target timezone
+      const utcTime = now.getTime() + (now.getTimezoneOffset() * 60000);
+      const targetTime = new Date(utcTime + (this.utcOffsetMinutes * 60000));
+      this.time.set(targetTime);
+    } else {
+      // Fallback to local time if no offset
+      this.time.set(now);
+    }
+  }
+
   formatTime(): string {
     return this.time().toLocaleTimeString('en-US', {
       hour: '2-digit',
       minute: '2-digit',
       second: '2-digit',
       hour12: false,
+      timeZone: this.timezone !== 'Local' ? this.timezone : undefined,
     });
   }
 
@@ -102,6 +136,7 @@ export class TimezoneCardComponent implements OnInit, OnDestroy {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
+      timeZone: this.timezone !== 'Local' ? this.timezone : undefined,
     });
   }
 }
