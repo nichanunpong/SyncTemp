@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --base-href=/SyncTemp/",
+    "build": "ng build --base-href=/SyncTemp/ --output-path=docs/browser",
     "build:vercel": "ng build --base-href=/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
